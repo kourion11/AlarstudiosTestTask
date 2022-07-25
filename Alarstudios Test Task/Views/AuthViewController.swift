@@ -14,13 +14,12 @@ protocol AuthPresenterDelegate: AnyObject {
     func presentAlert(title: String, text: String)
 }
 
-class AuthViewController: UIViewController, UITextFieldDelegate {
+class AuthViewController: UIViewController {
     
-    let networking = Networking()
     var presenter: PresenterOutputProtocol!
     
     private lazy var usernameTextField: UITextField = {
-        let textField = UITextField(frame: CGRect(x: 20, y: 100, width: 300, height: 40))
+        let textField = UITextField()
         textField.placeholder = "Username"
         textField.font = UIFont.systemFont(ofSize: 15)
         textField.autocapitalizationType = .none
@@ -34,7 +33,7 @@ class AuthViewController: UIViewController, UITextFieldDelegate {
     }()
     
     private lazy var passwordTextField: UITextField = {
-        let textField = UITextField(frame: CGRect(x: 20, y: 100, width: 300, height: 40))
+        let textField = UITextField()
         textField.placeholder = "Password"
         textField.font = UIFont.systemFont(ofSize: 15)
         textField.autocapitalizationType = .none
@@ -50,6 +49,7 @@ class AuthViewController: UIViewController, UITextFieldDelegate {
     private lazy var enterButton: UIButton = {
         let button = UIButton()
         button.setTitle("Log In", for: .normal)
+        button.setTitleColor(UIColor.blue, for: .normal)
         button.addTarget(self, action: #selector(getRequest), for: .touchUpInside)
         return button
     }()
@@ -71,7 +71,7 @@ class AuthViewController: UIViewController, UITextFieldDelegate {
     }
     
     func setupViews() {
-        view.backgroundColor = .brown
+        view.backgroundColor = .secondarySystemBackground
         view.addSubview(usernameTextField)
         view.addSubview(passwordTextField)
         view.addSubview(enterButton)
@@ -81,13 +81,17 @@ class AuthViewController: UIViewController, UITextFieldDelegate {
         usernameTextField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             usernameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            usernameTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            usernameTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100),
+            usernameTextField.heightAnchor.constraint(equalToConstant: 50),
+            usernameTextField.widthAnchor.constraint(equalToConstant: 300)
         ])
         
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             passwordTextField.centerXAnchor.constraint(equalTo: usernameTextField.centerXAnchor),
-            passwordTextField.topAnchor.constraint(equalTo: usernameTextField.bottomAnchor, constant: 40)
+            passwordTextField.topAnchor.constraint(equalTo: usernameTextField.bottomAnchor, constant: 40),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
+            passwordTextField.widthAnchor.constraint(equalToConstant: 300)
         ])
         
         enterButton.translatesAutoresizingMaskIntoConstraints = false
@@ -109,13 +113,26 @@ extension AuthViewController: AuthPresenterDelegate {
     
     func goToSecondVC() {
         let vc = SecondViewController()
-        present(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func presentAlert(title: String, text: String) {
         let alert = UIAlertController(title: title, message: text, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(alert, animated: true)
+    }
+}
+
+extension AuthViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == usernameTextField {
+            textField.resignFirstResponder()
+            passwordTextField.becomeFirstResponder()
+        } else {
+            getRequest()
+        }
+        return true
     }
 }
 

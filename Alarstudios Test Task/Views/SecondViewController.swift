@@ -37,7 +37,7 @@ class SecondViewController: UIViewController {
     }
     
     func setupTable() {
-        view.backgroundColor = .red
+        view.backgroundColor = .secondarySystemBackground
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -55,6 +55,15 @@ extension SecondViewController: UITableViewDelegate, UITableViewDataSource {
         let model = presenter?.elements?.data[indexPath.row]
         cell.textLabel?.text = model?.name
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        presenter.getLonLat(indexPath: indexPath)
+        let mapVC = MapViewController()
+        mapVC.lat = presenter.lat
+        mapVC.lon = presenter.lon
+        self.navigationController?.pushViewController(mapVC, animated: true)
     }
 }
 

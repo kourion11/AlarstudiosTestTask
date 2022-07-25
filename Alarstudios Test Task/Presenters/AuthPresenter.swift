@@ -15,20 +15,20 @@ protocol PresenterOutputProtocol {
 class AuthPresenter: PresenterOutputProtocol {
     
     weak var delegateView: AuthPresenterDelegate?
-    let networking = Networking()
+    let authRequest = AuthRequest()
     
     func getStatus() {
         let username = delegateView?.getUsername() ?? ""
         let password = delegateView?.getPassword() ?? ""
-        networking.authRequest(username: username, password: password) { [weak self] status in
+        authRequest.request(username: username, password: password) { [weak self] status in
             if status.status == "ok" {
                 DispatchQueue.main.async {
                     self?.delegateView?.goToSecondVC()
                 }
             } else {
                 DispatchQueue.main.async {
-                    let error = "Неправильный логин или пароль"
-                    self?.delegateView?.presentAlert(title: "Ошибка", text: error)
+                    let error = "Неверный логин или пароль!"
+                    self?.delegateView?.presentAlert(title: "Ошибка!", text: error)
                 }
             }
         }

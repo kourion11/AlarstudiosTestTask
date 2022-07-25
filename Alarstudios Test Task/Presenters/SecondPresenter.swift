@@ -8,16 +8,22 @@
 import Foundation
 
 protocol SecondOutputPresenterProtocol {
+    var lat: Double { get }
+    var lon: Double { get }
     var elements: ElementModel? { get set }
     func setupDelegate(delegate: SecondDelegateProtocol)
     func numberOfRowsInSectionElements() -> Int
     func getCode()
+    func getLonLat(indexPath: IndexPath)
 }
 
 class SecondPresenter: SecondOutputPresenterProtocol {
+    var lat = 0.0
+    var lon = 0.0
     
     var elements: ElementModel?
-    let networking = Networking()
+    let authRequest = AuthRequest()
+    let getElements = GetElements()
     
     weak var delegateView: SecondDelegateProtocol?
     
@@ -30,15 +36,20 @@ class SecondPresenter: SecondOutputPresenterProtocol {
     }
     
     func getCode() {
-        networking.authRequest(username: "test", password: "123") { status in
+        authRequest.request(username: "test", password: "123") { status in
             self.getElement(code: status.code)
         }
     }
     
     func getElement(code: String) {
-        networking.getElements(code: code) { element in
+        getElements.request(code: code) { element in
             self.elements = element
             self.delegateView?.presentData()
         }
+    }
+    
+    func getLonLat(indexPath: IndexPath) {
+        lat = elements?.data[indexPath.row].lat ?? 0.0
+        lon = elements?.data[indexPath.row].lon ?? 0.0
     }
 }

@@ -9,6 +9,8 @@ import UIKit
 
 protocol SecondDelegateProtocol: AnyObject {
     func presentData()
+    var username: String { get set }
+    var password: String { get set }
 }
 
 class SecondViewController: UIViewController {
@@ -20,13 +22,16 @@ class SecondViewController: UIViewController {
     
     var presenter: SecondOutputPresenterProtocol!
     
+    var username = ""
+    var password = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         presenter = SecondPresenter()
-        presenter?.setupDelegate(delegate: self)
+        presenter.setupDelegate(delegate: self)
         
-        presenter?.getCode()
+        presenter.getCode()
         setupTable()
     }
     
@@ -53,7 +58,12 @@ extension SecondViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let model = presenter?.elements?.data[indexPath.row]
-        cell.textLabel?.text = model?.name
+        let imagesURL = presenter.images.imagesURL[indexPath.row]
+        presenter.getImage(stringURL: imagesURL) { image in
+            guard let image = image else { return }
+            cell.textLabel?.text = model?.name
+            cell.imageView?.image = UIImage(data: image)
+        }
         return cell
     }
     

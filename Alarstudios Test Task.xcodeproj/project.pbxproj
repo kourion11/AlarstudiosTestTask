@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		33513E69288EE9C800ECB10D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33513E68288EE9C800ECB10D /* MapViewController.swift */; };
 		33513E6F288F239D00ECB10D /* GetElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33513E6E288F239D00ECB10D /* GetElements.swift */; };
+		33513E7128903FFE00ECB10D /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33513E7028903FFD00ECB10D /* Images.swift */; };
+		33513E732890408400ECB10D /* DownloadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33513E722890408400ECB10D /* DownloadImage.swift */; };
 		33D7E714288AECDD00CCA966 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D7E713288AECDD00CCA966 /* AppDelegate.swift */; };
 		33D7E718288AECDD00CCA966 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D7E717288AECDD00CCA966 /* AuthViewController.swift */; };
 		33D7E71D288AECDE00CCA966 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33D7E71C288AECDE00CCA966 /* Assets.xcassets */; };
@@ -24,6 +26,8 @@
 /* Begin PBXFileReference section */
 		33513E68288EE9C800ECB10D /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		33513E6E288F239D00ECB10D /* GetElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetElements.swift; sourceTree = "<group>"; };
+		33513E7028903FFD00ECB10D /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		33513E722890408400ECB10D /* DownloadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImage.swift; sourceTree = "<group>"; };
 		33D7E710288AECDD00CCA966 /* Alarstudios Test Task.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Alarstudios Test Task.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33D7E713288AECDD00CCA966 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33D7E717288AECDD00CCA966 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 			children = (
 				33D7E72C288AED7200CCA966 /* AuthModel.swift */,
 				33D7E735288B1C1800CCA966 /* ElementModel.swift */,
+				33513E7028903FFD00ECB10D /* Images.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -120,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				33D7E72F288AEDA000CCA966 /* AuthRequest.swift */,
+				33513E722890408400ECB10D /* DownloadImage.swift */,
 				33513E6E288F239D00ECB10D /* GetElements.swift */,
 			);
 			path = Networking;
@@ -196,8 +202,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				33D7E732288B022600CCA966 /* AuthPresenter.swift in Sources */,
+				33513E732890408400ECB10D /* DownloadImage.swift in Sources */,
 				33D7E718288AECDD00CCA966 /* AuthViewController.swift in Sources */,
 				33D7E736288B1C1800CCA966 /* ElementModel.swift in Sources */,
+				33513E7128903FFE00ECB10D /* Images.swift in Sources */,
 				33513E6F288F239D00ECB10D /* GetElements.swift in Sources */,
 				33513E69288EE9C800ECB10D /* MapViewController.swift in Sources */,
 				33D7E730288AEDA000CCA966 /* AuthRequest.swift in Sources */,

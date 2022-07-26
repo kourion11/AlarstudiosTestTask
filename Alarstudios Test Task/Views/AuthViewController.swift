@@ -20,7 +20,7 @@ class AuthViewController: UIViewController {
     
     private lazy var usernameTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Username"
+        textField.placeholder = "Логин"
         textField.font = UIFont.systemFont(ofSize: 15)
         textField.autocapitalizationType = .none
         textField.borderStyle = UITextField.BorderStyle.roundedRect
@@ -34,7 +34,7 @@ class AuthViewController: UIViewController {
     
     private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Password"
+        textField.placeholder = "Пароль"
         textField.font = UIFont.systemFont(ofSize: 15)
         textField.autocapitalizationType = .none
         textField.borderStyle = UITextField.BorderStyle.roundedRect
@@ -48,7 +48,7 @@ class AuthViewController: UIViewController {
     
     private lazy var enterButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Log In", for: .normal)
+        button.setTitle("Войти", for: .normal)
         button.setTitleColor(UIColor.blue, for: .normal)
         button.addTarget(self, action: #selector(getRequest), for: .touchUpInside)
         return button
@@ -113,6 +113,8 @@ extension AuthViewController: AuthPresenterDelegate {
     
     func goToSecondVC() {
         let vc = SecondViewController()
+        vc.username = getUsername()
+        vc.password = getPassword()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

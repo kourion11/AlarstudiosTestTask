@@ -9,8 +9,6 @@ import UIKit
 
 protocol SecondDelegateProtocol: AnyObject {
     func presentData()
-    var username: String { get set }
-    var password: String { get set }
 }
 
 class SecondViewController: UIViewController {
@@ -19,17 +17,11 @@ class SecondViewController: UIViewController {
         let table = UITableView()
         return table
     }()
-    
-    var presenter: SecondOutputPresenterProtocol!
-    
-    var username = ""
-    var password = ""
+
+    private var presenter: SecondOutputPresenterProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        presenter = SecondPresenter()
-        presenter.setupDelegate(delegate: self)
         
         presenter.getCode()
         setupTable()
@@ -39,6 +31,10 @@ class SecondViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         tableView.frame = view.bounds
+    }
+    
+    func setPresenter(_ presenter: SecondOutputPresenterProtocol) {
+        self.presenter = presenter
     }
     
     func setupTable() {

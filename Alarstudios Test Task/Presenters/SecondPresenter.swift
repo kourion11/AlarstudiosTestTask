@@ -11,8 +11,6 @@ import UIKit
 protocol SecondOutputPresenterProtocol {
     var lat: Double { get }
     var lon: Double { get }
-    var username: String { get set }
-    var password: String { get set }
     var images: Images { get }
     var elements: ElementModel? { get set }
     func setupDelegate(delegate: SecondDelegateProtocol)
@@ -36,8 +34,15 @@ class SecondPresenter: SecondOutputPresenterProtocol {
     var lat = 0.0
     var lon = 0.0
     
-    var username = ""
-    var password = ""
+    private let username: String
+    private let password: String
+    
+    // MARK: - Initializers
+    init(view: SecondDelegateProtocol, username: String, password: String) {
+        self.delegateView = view
+        self.username = username
+        self.password = password
+    }
     
     func setupDelegate(delegate: SecondDelegateProtocol) {
         self.delegateView = delegate
@@ -48,8 +53,6 @@ class SecondPresenter: SecondOutputPresenterProtocol {
     }
     
     func getCode() {
-        username = delegateView?.username ?? ""
-        password = delegateView?.password ?? ""
         authRequest.request(username: username, password: password) { status in
             self.getElement(code: status.code)
         }

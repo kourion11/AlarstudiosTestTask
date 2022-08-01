@@ -22,6 +22,7 @@ class AuthRequest {
             do {
                 let json = try JSONDecoder().decode(AuthModel.self, from: data)
                 completion(json)
+                print(json)
             } catch {
                 print(error.localizedDescription)
             }

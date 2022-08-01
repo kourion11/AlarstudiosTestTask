@@ -17,6 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow()
         let nav = UINavigationController()
         let vc = AuthViewController()
+        let presenter = AuthPresenter(view: vc)
+        vc.setPresenter(presenter)
+        
         nav.viewControllers = [vc]
         window.rootViewController = nav
         window.makeKeyAndVisible()

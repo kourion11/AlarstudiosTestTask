@@ -18,7 +18,6 @@ class GetElements {
             do {
                 let json = try JSONDecoder().decode(ElementModel.self, from: data)
                 completion(json)
-                print(json)
             } catch {
                 print(error)
             }

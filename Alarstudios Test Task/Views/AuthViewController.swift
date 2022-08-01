@@ -16,7 +16,7 @@ protocol AuthPresenterDelegate: AnyObject {
 
 class AuthViewController: UIViewController {
     
-    var presenter: PresenterOutputProtocol!
+    private var presenter: PresenterOutputProtocol!
     
     private lazy var usernameTextField: UITextField = {
         let textField = UITextField()
@@ -59,10 +59,10 @@ class AuthViewController: UIViewController {
         
         setupViews()
         setupConstraints()
-        
-        // Presenter
-        presenter = AuthPresenter()
-        presenter.setAuthDelegate(delegate: self)
+    }
+    
+    func setPresenter(_ presenter: PresenterOutputProtocol) {
+        self.presenter = presenter
     }
     
     @objc
@@ -113,8 +113,9 @@ extension AuthViewController: AuthPresenterDelegate {
     
     func goToSecondVC() {
         let vc = SecondViewController()
-        vc.username = getUsername()
-        vc.password = getPassword()
+        let presenter = SecondPresenter(view: vc, username: getUsername(), password: getPassword())
+        vc.setPresenter(presenter)
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

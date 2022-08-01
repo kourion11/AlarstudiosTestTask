@@ -17,6 +17,12 @@ class AuthPresenter: PresenterOutputProtocol {
     weak var delegateView: AuthPresenterDelegate?
     let authRequest = AuthRequest()
     
+    // MARK: - Initializers
+    init(view: AuthPresenterDelegate) {
+        self.delegateView = view
+    }
+
+    // MARK: - Methods
     func getStatus() {
         let username = delegateView?.getUsername() ?? ""
         let password = delegateView?.getPassword() ?? ""

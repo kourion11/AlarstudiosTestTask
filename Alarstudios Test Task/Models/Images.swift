@@ -21,5 +21,3 @@ struct Images {
         "https://cdn-icons-png.flaticon.com/512/4230/4230843.png"
     ]
 }
-
-

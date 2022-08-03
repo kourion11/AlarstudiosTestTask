@@ -9,38 +9,33 @@ import Foundation
 
 protocol PresenterOutputProtocol {
     func getStatus()
-    func setAuthDelegate(delegate: AuthPresenterDelegate)
 }
 
 class AuthPresenter: PresenterOutputProtocol {
     
-    weak var delegateView: AuthPresenterDelegate?
+    weak var view: AuthPresenterDelegate?
     let authRequest = AuthRequest()
     
     // MARK: - Initializers
     init(view: AuthPresenterDelegate) {
-        self.delegateView = view
+        self.view = view
     }
 
     // MARK: - Methods
     func getStatus() {
-        let username = delegateView?.getUsername() ?? ""
-        let password = delegateView?.getPassword() ?? ""
+        let username = view?.getUsername() ?? ""
+        let password = view?.getPassword() ?? ""
         authRequest.request(username: username, password: password) { [weak self] status in
             if status.status == "ok" {
                 DispatchQueue.main.async {
-                    self?.delegateView?.goToSecondVC()
+                    self?.view?.goToSecondVC()
                 }
             } else {
                 DispatchQueue.main.async {
                     let error = "Неверный логин или пароль!"
-                    self?.delegateView?.presentAlert(title: "Ошибка!", text: error)
+                    self?.view?.presentAlert(title: "Ошибка!", text: error)
                 }
             }
         }
-    }
-    
-    func setAuthDelegate(delegate: AuthPresenterDelegate) {
-        self.delegateView = delegate
     }
 }

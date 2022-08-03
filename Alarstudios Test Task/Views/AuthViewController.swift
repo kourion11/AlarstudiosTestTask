@@ -115,7 +115,6 @@ extension AuthViewController: AuthPresenterDelegate {
         let vc = SecondViewController()
         let presenter = SecondPresenter(view: vc, username: getUsername(), password: getPassword())
         vc.setPresenter(presenter)
-        
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -138,4 +137,3 @@ extension AuthViewController: UITextFieldDelegate {
         return true
     }
 }
-
